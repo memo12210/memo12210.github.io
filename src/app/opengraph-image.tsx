@@ -1,8 +1,8 @@
  
 import { ImageResponse } from "next/og";
+import { getFontData, getAvatarDataUri } from "@/lib/og-fonts";
 import { DATA } from "@/data/resume";
 
-export const runtime = "edge";
 
 export const alt = DATA.name;
 export const size = {
@@ -11,22 +11,9 @@ export const size = {
 };
 export const contentType = "image/png";
 
-const getFontData = async () => {
-    try {
-        const [cabinetGrotesk, clashDisplay] = await Promise.all([
-            fetch(
-                new URL("../../public/fonts/CabinetGrotesk-Medium.ttf", import.meta.url)
-            ).then((res) => res.arrayBuffer()),
-            fetch(
-                new URL("../../public/fonts/ClashDisplay-Semibold.ttf", import.meta.url)
-            ).then((res) => res.arrayBuffer()),
-        ]);
-        return { cabinetGrotesk, clashDisplay };
-    } catch (error) {
-        console.error("Failed to load fonts:", error);
-        return null;
-    }
-};
+// Required by output: "export" — bake the OG image at build time.
+export const dynamic = "force-static";
+
 
 const styles = {
     outerWrapper: {
@@ -108,9 +95,7 @@ const styles = {
 export default async function Image() {
     try {
         const fontData = await getFontData();
-        const imageUrl = DATA.avatarUrl
-            ? new URL(DATA.avatarUrl, DATA.url).toString()
-            : undefined;
+        const imageUrl = await getAvatarDataUri(DATA.avatarUrl);
 
         return new ImageResponse(
             (
