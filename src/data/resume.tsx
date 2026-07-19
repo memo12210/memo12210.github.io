@@ -199,21 +199,21 @@ export const DATA = {
       date: "June 2026",
       description:
         " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nibh ligula, faucibus eu augue nec mauris.",
-      url: "https://soundcloud.com/davebrubeck/take-five-32",
+      url: "https://soundcloud.com/royaltyfreebackgroundmusic/creative-commons-music-3654",
     },
     {
       title: "Dolor sit Amet",
       date: "March 2026",
       description:
         " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nibh ligula, faucibus eu augue nec mauris. ",
-      url: "https://soundcloud.com/davebrubeck/take-five-32",
+      url: "https://soundcloud.com/royaltyfreebackgroundmusic/creative-commons-music-3655",
     },
     {
       title: "Consctetur Elit",
       date: "November 2025",
       description:
         " Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nibh ligula, faucibus eu augue nec mauris. ",
-      url: "https://soundcloud.com/davebrubeck/take-five-32",
+      url: "https://soundcloud.com/royaltyfreebackgroundmusic/creative-commons-music-3656",
     },
   ],
 } as const;
