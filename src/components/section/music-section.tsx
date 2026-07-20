@@ -37,8 +37,7 @@ export default function MusicSection() {
               I make music too
             </h2>
             <p className="text-muted-foreground md:text-lg/relaxed lg:text-base/relaxed xl:text-lg/relaxed text-balance text-center">
-              Aside from programming, I also compose music. Here are some of
-              them.
+              Aside from programming, I also compose music.
             </p>
           </div>
         </div>
