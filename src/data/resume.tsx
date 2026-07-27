@@ -184,8 +184,8 @@ export const DATA = {
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/placeholder.png",
-      video: "",
+      image: "",
+      video: "pizza_delivery_3d.mp4",
     },
   ],
   music: [
