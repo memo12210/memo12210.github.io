@@ -144,12 +144,12 @@ export const DATA = {
         },
         {
           type: "Source",
-          href: "https://github.com/memo12210",
+          href: "https://github.com/memo12210/Scopapilia",
           icon: <Icons.github className="size-3" />,
         },
       ],
-      image: "/placeholder.png",
-      video: "",
+      image: "",
+      video: "/scopapilia.mp4",
     },
     {
       title: "Bitty Witch",
@@ -165,14 +165,9 @@ export const DATA = {
           href: "https://neneme.itch.io/bitty-witchy",
           icon: <Icons.globe className="size-3" />,
         },
-        {
-          type: "Source",
-          href: "https://github.com/memo12210/",
-          icon: <Icons.github className="size-3" />,
-        },
       ],
-      image: "/placeholder.png",
-      video: "",
+      image: "",
+      video: "/bitty_witch.mp4",
     },
     {
       title: "Pizza Delivery 3D",
