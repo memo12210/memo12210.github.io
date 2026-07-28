@@ -125,7 +125,7 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/placeholder.png",
+      image: "/smart_greenhouse.png",
       video: "",
     },
     {
