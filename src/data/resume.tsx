@@ -21,8 +21,9 @@ export const DATA = {
   description:
     "Software engineer and game developer, with an interest in graphics programming and embedded systems.",
   summary:
-    "At the summer of 2026, I graduated from the Dokuz Eylül University with a degree in Computer Engineering. I have been developing games and software for over 5 years, and currently work as a game developer intern at a game studio. I have experience in C++, C#, and Python, and have worked on several software and game development projects.",
+    "As of summer 2026, I graduated from the Dokuz Eylül University with a degree in Computer Engineering. I have been developing games and software for over 5 years, and currently work as a game developer intern at a game studio. I have experience in C++, C#, and Python, and have worked on several software and game development projects.",
   avatarUrl: "/me.jpg",
+  resumeUrl: "/mehmet_calikoglu_resume.pdf",
   skills: [
     { name: "C++", icon: Cpp },
     { name: "C#", icon: Csharp },
