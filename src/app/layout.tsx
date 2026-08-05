@@ -8,16 +8,19 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { FlickeringGrid } from "@/components/magicui/flickering-grid";
 
+// Both families are variable fonts: omitting `weight` ships one file covering
+// every weight instead of a static instance per weight.
 const geist = Geist({
   subsets: ["latin"],
   variable: "--font-sans",
-  weight: ["400", "500", "600", "700"],
 });
 
+// Only used by code blocks, the blog index numbers and the 404 — never above the
+// fold — so it is fetched on demand rather than preloaded on every page.
 const geistMono = Geist_Mono({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
   variable: "--font-mono",
+  preload: false,
 });
 
 export const metadata: Metadata = {

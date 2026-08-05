@@ -1,29 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
-
 import { Badge } from "@/components/ui/badge";
+import { LazyVideo } from "@/components/lazy-video";
 import { cn } from "@/lib/utils";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { useState } from "react";
-import Markdown from "react-markdown";
-
-function ProjectImage({ src, alt }: { src: string; alt: string }) {
-  const [imageError, setImageError] = useState(false);
-
-  if (!src || imageError) {
-    return <div className="w-full h-48 bg-muted" />;
-  }
-
-  return (
-    <img
-      src={src}
-      alt={alt}
-      className="w-full h-48 object-cover"
-      onError={() => setImageError(true)}
-    />
-  );
-}
 
 interface Props {
   title: string;
@@ -34,6 +14,7 @@ interface Props {
   link?: string;
   image?: string;
   video?: string;
+  poster?: string;
   links?: readonly {
     icon: React.ReactNode;
     type: string;
@@ -51,6 +32,7 @@ export function ProjectCard({
   link,
   image,
   video,
+  poster,
   links,
   className,
 }: Props) {
@@ -69,16 +51,21 @@ export function ProjectCard({
           className="block"
         >
           {video ? (
-            <video
+            <LazyVideo
               src={video}
-              autoPlay
-              loop
-              muted
-              playsInline
-              className="w-full h-48 object-cover"
+              poster={poster ?? ""}
+              className="w-full h-48 object-cover bg-muted"
             />
           ) : image ? (
-            <ProjectImage src={image} alt={title} />
+            <img
+              src={image}
+              alt={title}
+              width={800}
+              height={192}
+              loading="lazy"
+              decoding="async"
+              className="w-full h-48 object-cover"
+            />
           ) : (
             <div className="w-full h-48 bg-muted" />
           )}
@@ -91,7 +78,6 @@ export function ProjectCard({
                 key={idx}
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
               >
                 <Badge
                   className="flex items-center gap-1.5 text-xs bg-black text-white hover:bg-black/90"
@@ -122,7 +108,7 @@ export function ProjectCard({
           </Link>
         </div>
         <div className="text-xs flex-1 prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-          <Markdown>{description}</Markdown>
+          <p>{description}</p>
         </div>
         {tags && tags.length > 0 && (
           <div className="flex flex-wrap gap-1 mt-auto">

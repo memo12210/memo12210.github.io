@@ -1,10 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 import BlurFade from "@/components/magicui/blur-fade";
 import BlurFadeText from "@/components/magicui/blur-fade-text";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { DATA } from "@/data/resume";
 import Link from "next/link";
-import Markdown from "react-markdown";
 import ContactSection from "@/components/section/contact-section";
 import MusicSection from "@/components/section/music-section";
 import ProjectsSection from "@/components/section/projects-section";
@@ -34,22 +32,37 @@ export default function Page() {
               />
               <BlurFade delay={BLUR_FADE_DELAY * 1.5} className="mt-2">
                 <Button variant="outline" size="sm" className="gap-2" asChild>
-                  <Link
+                  {/* Plain anchor: next/link treats this as a route and prefetches
+                      an RSC payload for it, which 404s against a static PDF. */}
+                  <a
                     href={DATA.resumeUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     <FileText className="size-4" />
                     View My Resume
-                  </Link>
+                  </a>
                 </Button>
               </BlurFade>
             </div>
             <BlurFade delay={BLUR_FADE_DELAY} className="order-1 md:order-2">
-              <Avatar className="size-24 md:size-32 border rounded-full shadow-lg ring-4 ring-muted">
-                <AvatarImage alt={DATA.name} src={DATA.avatarUrl} />
-                <AvatarFallback>{DATA.initials}</AvatarFallback>
-              </Avatar>
+              {/* Plain <img> rather than Radix Avatar: Radix only mounts the
+                  image once JS has run, which kept this LCP candidate out of the
+                  server-rendered HTML entirely.
+                  The size lives on the wrapper, not the <img>: preflight applies
+                  `max-width: 100%` to images, which would clamp the width against a
+                  shrunk flex parent while the height held — rendering an ellipse. */}
+              <span className="relative flex size-24 md:size-32 shrink-0 overflow-hidden rounded-full border shadow-lg ring-4 ring-muted">
+                <img
+                  src={DATA.avatarUrl}
+                  alt={DATA.name}
+                  width={128}
+                  height={128}
+                  fetchPriority="high"
+                  decoding="async"
+                  className="aspect-square h-full w-full object-cover"
+                />
+              </span>
             </BlurFade>
           </div>
         </div>
@@ -61,7 +74,7 @@ export default function Page() {
           </BlurFade>
           <BlurFade delay={BLUR_FADE_DELAY * 4}>
             <div className="prose max-w-full text-pretty font-sans leading-relaxed text-muted-foreground dark:prose-invert">
-              <Markdown>{DATA.summary}</Markdown>
+              <p>{DATA.summary}</p>
             </div>
           </BlurFade>
         </div>
@@ -98,6 +111,10 @@ export default function Page() {
                       <img
                         src={education.logoUrl}
                         alt={education.school}
+                        width={40}
+                        height={40}
+                        loading="lazy"
+                        decoding="async"
                         className="size-8 md:size-10 p-1 border rounded-full shadow ring-2 ring-border overflow-hidden object-contain flex-none"
                       />
                     ) : (

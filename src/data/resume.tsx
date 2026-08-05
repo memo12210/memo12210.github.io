@@ -73,7 +73,7 @@ export const DATA = {
       badges: [],
       location: "Izmir, Turkey",
       title: "Game Developer Intern",
-      logoUrl: "/furtlegame.jpg",
+      logoUrl: "/furtlegame.webp",
       start: "Jul 2026",
       end: "Aug 2026",
       description:
@@ -85,7 +85,7 @@ export const DATA = {
       badges: [],
       location: "Izmir, Turkey",
       title: "Software Engineer Intern",
-      logoUrl: "/optimimax.jpg",
+      logoUrl: "/optimimax.webp",
       start: "Aug 2024",
       end: "Sep 2024",
       description:
@@ -97,7 +97,7 @@ export const DATA = {
       school: "Dokuz Eylül University",
       href: "https://deu.edu.tr/",
       degree: "BSc in Computer Engineering",
-      logoUrl: "/deu.png",
+      logoUrl: "/deu.webp",
       start: "2023",
       end: "2026",
     },
@@ -126,8 +126,9 @@ export const DATA = {
           icon: <Icons.globe className="size-3" />,
         },
       ],
-      image: "/smart_greenhouse.png",
+      image: "/smart_greenhouse.webp",
       video: "",
+      poster: "",
     },
     {
       title: "Scopapilia",
@@ -151,6 +152,7 @@ export const DATA = {
       ],
       image: "",
       video: "/scopapilia.mp4",
+      poster: "/scopapilia-poster.webp",
     },
     {
       title: "Bitty Witch",
@@ -169,6 +171,7 @@ export const DATA = {
       ],
       image: "",
       video: "/bitty_witch.mp4",
+      poster: "/bitty_witch-poster.webp",
     },
     {
       title: "Pizza Delivery 3D",
@@ -186,7 +189,8 @@ export const DATA = {
         },
       ],
       image: "",
-      video: "pizza_delivery_3d.mp4",
+      video: "/pizza_delivery_3d.mp4",
+      poster: "/pizza_delivery_3d-poster.webp",
     },
   ],
   music: [

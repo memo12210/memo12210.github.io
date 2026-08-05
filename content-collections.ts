@@ -1,8 +1,8 @@
 import { defineCollection, defineConfig } from "@content-collections/core";
 import { compileMDX } from "@content-collections/mdx";
 import remarkGfm from "remark-gfm";
+import rehypePrettyCode from "rehype-pretty-code";
 import { z } from "zod";
-import { remarkCodeMeta } from "./src/lib/remark-code-meta";
 
 const posts = defineCollection({
     name: "posts",
@@ -19,7 +19,21 @@ const posts = defineCollection({
     }),
     transform: async (document, context) => {
         const mdx = await compileMDX(context, document, {
-            remarkPlugins: [remarkGfm, remarkCodeMeta],
+            remarkPlugins: [remarkGfm],
+            // Highlight at build time. Doing it in the browser pulled Shiki and
+            // its grammars into the client bundle and reflowed every code block
+            // after hydration. `defaultColor: false` emits --shiki-light /
+            // --shiki-dark custom properties, which globals.css already switches on.
+            rehypePlugins: [
+                [
+                    rehypePrettyCode,
+                    {
+                        theme: { light: "github-light", dark: "github-dark" },
+                        defaultColor: false,
+                        keepBackground: false,
+                    },
+                ],
+            ],
         });
         return {
         ...document,

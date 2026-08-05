@@ -8,6 +8,25 @@ type CodeProps = ComponentProps<"code"> & {
 
 export const mdxComponents = {
   MediaContainer,
+  // rehype-pretty-code wraps each block in a <figure>; rendering it as a plain
+  // div keeps the previous flush spacing (typography gives <figure> its own
+  // margins) while still providing the bordered container and hover group.
+  figure: ({ children, ...props }: ComponentProps<"figure">) =>
+    "data-rehype-pretty-code-figure" in props ? (
+      <div className="group relative rounded-xl overflow-hidden border border-border">
+        {children}
+      </div>
+    ) : (
+      <figure {...props}>{children}</figure>
+    ),
+  figcaption: ({ children, ...props }: ComponentProps<"figcaption">) =>
+    "data-rehype-pretty-code-title" in props ? (
+      <div className="p-3 text-xs font-medium border-b border-border bg-muted/50 text-foreground">
+        {children}
+      </div>
+    ) : (
+      <figcaption {...props}>{children}</figcaption>
+    ),
   pre: (props: ComponentProps<"pre">) => <CodeBlock {...props} />,
   hr: (props: ComponentProps<"hr">) => (
     <div className="my-10 flex w-full items-center" {...props}>

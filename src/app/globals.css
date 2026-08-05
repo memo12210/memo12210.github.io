@@ -4,6 +4,34 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Entrance animation behind BlurFade / BlurFadeText.
+   Deliberately CSS rather than a JS animation library: it starts at first paint
+   instead of waiting for hydration, so the hero heading (the LCP element) is not
+   held at opacity 0 until the client bundle has downloaded and run. */
+@keyframes blur-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(var(--blur-fade-y, -6px));
+    filter: blur(var(--blur-fade-blur, 6px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.blur-fade {
+  animation: blur-fade-in var(--blur-fade-duration, 0.4s) ease-out
+    var(--blur-fade-delay, 0s) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blur-fade {
+    animation: none;
+  }
+}
+
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -120,15 +148,16 @@
     @apply bg-background text-foreground;
   }
 
-  /* Shiki dual theme support */
-  .shiki,
-  .shiki span {
+  /* Shiki dual theme support. rehype-pretty-code marks highlighted blocks with
+     data-theme and emits both colours as custom properties on each token. */
+  code[data-theme],
+  code[data-theme] span {
     color: var(--shiki-light);
     background-color: transparent;
   }
 
-  .dark .shiki,
-  .dark .shiki span {
+  .dark code[data-theme],
+  .dark code[data-theme] span {
     color: var(--shiki-dark);
     background-color: transparent;
   }
